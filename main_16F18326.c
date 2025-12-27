@@ -71,8 +71,8 @@ void __interrupt()isr()
 
 int main(int argc, char** argv)
 {
-  
-    uint8_t counter,length;
+    uint16_t counter;
+    uint8_t length;
     uint8_t txt[15];
     //Oscillator
     OSCCON1bits.NOSC=0b110;
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
     LCD_ST7032_Init(LCD_ST7032_deviceAdd);
     LCD_ST7032_Command(LCD_ST7032_deviceAdd,0x80);
     LCD_ST7032_WriteData(LCD_ST7032_deviceAdd,0x41);
-    
+    LCD_ST7032_Printf(LCD_ST7032_deviceAdd,"AQM1602A",length,0x80);
     Timer0_INIT();
             
     Interrupt_START();
@@ -101,8 +101,8 @@ int main(int argc, char** argv)
             INTCONbits.GIE=0;
             INTCONbits.PEIE=0;
             tm0.up=T0_STOP;
-            length = sprintf(txt,"%03d",counter++);
-            LCD_ST7032_Printf(LCD_ST7032_deviceAdd,txt,length,0x80);
+            length = sprintf(txt,"%07d",counter++);
+            LCD_ST7032_Printf(LCD_ST7032_deviceAdd,txt,length,0xC0);
             PIE1bits.TMR1IE=1;
             INTCONbits.GIE=1;
        }

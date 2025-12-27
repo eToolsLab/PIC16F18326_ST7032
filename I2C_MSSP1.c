@@ -10,7 +10,8 @@ void I2C1_Reg_Init(void)
     SSP1CON3=0x00;
     //SSP1ADD=0x50;//Fosc=16Mhz Fclock=50kHz
     //SSP1ADD=0x27;//Fosc=16MHz Fclock=100kHz
-    SSP1ADD=0x1D;//Fosc=12MHz Fclock=100kHz
+    //SSP1ADD=0x1D;//Fosc=12MHz Fclock=100kHz
+    SSP1ADD=0x06;//Fosc=12MHz Fclock=400kHz
     PIE1bits.SSP1IE=0;
     PIE1bits.BCL1IE=1;
 }
